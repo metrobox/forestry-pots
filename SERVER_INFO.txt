@@ -1,0 +1,60 @@
+🎉 Forestry Pots Platform is now running!
+==========================================
+
+✅ Backend Server: http://localhost:5001
+✅ Frontend Application: http://localhost:5173
+✅ Database: PostgreSQL (forestry_pots)
+
+📋 Login Credentials:
+--------------------
+
+Admin Account:
+  Email: admin@forestrypots.com
+  Password: admin123
+  Access: Full admin dashboard
+
+Demo User:
+  Email: demo@example.com
+  Password: demo123
+  Access: User features only
+
+📊 Database Status:
+------------------
+✓ 16 demo products seeded
+✓ 2 users created (admin + demo)
+✓ All tables initialized
+
+🌐 To access the application:
+----------------------------
+1. Open your browser
+2. Go to: http://localhost:5173
+3. Login with credentials above
+
+🛠 Server Management:
+--------------------
+Both servers are running in background sessions:
+- Backend: Session cmd_1z3a1
+- Frontend: Session cmd_u7xrb
+
+To stop servers:
+  Kill both terminal processes or close this terminal
+
+To restart:
+  cd backend && npm run dev
+  cd frontend && npm run dev
+
+📁 Project Location:
+-------------------
+/Users/as23/Desktop/Forestry Pots
+
+🎨 Features to Test:
+-------------------
+1. Landing page with colorful gradients
+2. Login with admin or demo user
+3. Browse product catalog
+4. Download files (will be watermarked)
+5. Submit RFP requests
+6. Admin: Create/manage users
+7. View access logs (admin only)
+
+⚠️  Note: Email functionality requires SMTP configuration in backend/.env
