@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const path = require('path');
 require('dotenv').config();
 
-const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const rfpRoutes = require('./routes/rfpRoutes');
 const fileRoutes = require('./routes/fileRoutes');
@@ -17,10 +16,19 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
+const allowed = (process.env.CLIENT_URLS || "http://localhost:5173")
+  .split(",")
+  .map(s => s.trim());
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
+  origin: function (origin, cb) {
+    if (!origin) return cb(null, true);
+    if (allowed.includes(origin)) return cb(null, true);
+    return cb(new Error("Not allowed by CORS"));
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
