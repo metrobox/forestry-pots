@@ -23,18 +23,17 @@ const allowed = (process.env.CLIENT_URLS || "http://localhost:5173")
 
 app.use(cors({
   origin: function (origin, cb) {
-    // Allow non-browser requests (curl, server-to-server)
     if (!origin) return cb(null, true);
-
-    // Allow only whitelisted frontends
     if (allowed.includes(origin)) return cb(null, true);
-
-    // Reject without throwing a server error (preflight must not 500)
-    return cb(null, false);
+    return cb(null, false);   // ❗ do NOT throw Error here
   },
   credentials: true,
-  optionsSuccessStatus: 204
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// 🔥 Explicit preflight handling
+app.options("*", cors());
 
 
 app.use(express.json());
