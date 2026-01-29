@@ -23,12 +23,19 @@ const allowed = (process.env.CLIENT_URLS || "http://localhost:5173")
 
 app.use(cors({
   origin: function (origin, cb) {
+    // Allow non-browser requests (curl, server-to-server)
     if (!origin) return cb(null, true);
+
+    // Allow only whitelisted frontends
     if (allowed.includes(origin)) return cb(null, true);
-    return cb(new Error("Not allowed by CORS"));
+
+    // Reject without throwing a server error (preflight must not 500)
+    return cb(null, false);
   },
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 204
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
