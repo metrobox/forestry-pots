@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const path = require('path');
 require('dotenv').config();
 
+const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const rfpRoutes = require('./routes/rfpRoutes');
 const fileRoutes = require('./routes/fileRoutes');
